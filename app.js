@@ -1,7 +1,6 @@
 //AlexErrand.github.io
+import { createAuth0Client } from '@auth0/auth0-spa-js';
 auth0.createAuth0Client({
-    domain: "{yourDomain}",
-    clientId: "{yourClientId}",
     authorizationParams: {
       redirect_uri: window.location.origin
     }
