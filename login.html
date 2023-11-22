@@ -53,6 +53,10 @@
   </style>
 </head>
 <body>
+  <button id="btn-call-api" onclick="callApi()">Call Api</button>
+
+  <!-- Add a container to hold the response from the call -->
+  <pre id="api-call-result"></pre>
 
   <div class="container">
     <label for="uname"><b>Username</b></label>
@@ -72,6 +76,67 @@
       <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
   </div>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js';
+        document.body.appendChild(script);
+        script.onload = function() {
+          // Auth0 SDK is loaded, now execute your logic
+          auth0LoginLogic();
+        };
+    });
 
+    async function auth0LoginLogic() {
+        // app.js logic goes here
+        const auth0Client = await createAuth0Client({
+            domain: "dev-a1202082nxliupsb.us.auth0.com",
+            clientId: "N9lRZPbuhjbmZUVOQ5X8bNuuqNu5YGWv",
+            authorizationParams: {
+                redirect_uri: window.location.origin
+            }
+        });
+
+        const loginButton = document.getElementById("loginLink");
+        const logoutButton = document.getElementById("logoutLink");
+        const profileElement = document.getElementById("profile");
+
+        loginButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            auth0Client.loginWithRedirect();
+        });
+
+        logoutButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            auth0Client.logout();
+        });
+
+        if (location.search.includes("state=") &&
+            (location.search.includes("code=") ||
+                location.search.includes("error="))) {
+            await auth0Client.handleRedirectCallback();
+            window.history.replaceState({}, document.title, "/");
+        }
+
+        const isAuthenticated = await auth0Client.isAuthenticated();
+        const userProfile = isAuthenticated ? await auth0Client.getUser() : null;
+
+        if (isAuthenticated) {
+            profileElement.style.display = "block";
+            profileElement.innerHTML = `
+                <p>${userProfile.name}</p>
+                <img src="${userProfile.picture}" />
+            `;
+            loginButton.style.display = "none";
+            logoutButton.style.display = "block";
+        } else {
+            profileElement.style.display = "none";
+            loginButton.style.display = "block";
+            logoutButton.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
