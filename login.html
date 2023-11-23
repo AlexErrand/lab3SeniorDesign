@@ -53,7 +53,17 @@
   </style>
 </head>
 <body>
-  <button id="btn-call-api" onclick="callApi()">Call Api</button>
+  <!-- Login button: show if NOT authenticated -->
+  <li class="nav-item auth-invisible">
+    <button
+      id="qsLoginBtn"
+      onclick="login()"
+      class="btn btn-primary btn-margin auth-invisible hidden"
+    >
+      Log in
+    </button>
+  </li>
+  <!-- / Login button -->
 
   <!-- Add a container to hold the response from the call -->
   <pre id="api-call-result"></pre>

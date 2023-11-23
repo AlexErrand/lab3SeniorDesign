@@ -1,7 +1,7 @@
 const express = require("express");
 const { auth } = require("express-oauth2-jwt-bearer");
 const { join } = require("path");
-const authConfig = require("./auth_config.json");
+const authConfig = require("../auth_config.json");
 
 const app = express();
 
