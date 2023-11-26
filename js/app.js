@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
-const port = 3000; // Change as needed
+const port = 5501; // Change as needed
 const mongoUrl = 'mongodb+srv://rvalle:<password>@cluster0.mk7dyfi.mongodb.net/?retryWrites=true&w=majority'; // Change with your MongoDB connection URL
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,7 +13,7 @@ app.use(express.static('public'));
 MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
   if (err) throw err;
 
-  const db = client.db('your_database_name'); // Change with your database name
+  const db = client.db('Cluster0'); // Change with your database name
 
   // Login route
   app.post('/login', (req, res) => {
