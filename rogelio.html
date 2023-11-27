@@ -2,31 +2,68 @@
 <html>
 <head>
     <meta name="viewport" content="with=device-width, initial-scale=1.0">
-    <title>About Rogelio</title>
+    <title>About Brandon</title>
     <link rel="stylesheet" href="css\styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap" rel="stylesheet">
 </head>    
-<body class="body">
-<section class="rogheader">
-    <nav>
-        <a href="index.html">
-        <div class="nav-links">
+<body>
+    <header>
+        <div class="container">
+          <div id="branding">
+            <h1><span class="highlight">Seamen</span> Squad</h1>
+          </div>
+          <nav>
             <ul>
-                <li><a href="index.html">HOME</a></li>
+              <li class="current"><a href="index.html">Home</a></li>
+              <!-- Use a unique id for the login link -->
+              <li id="loginButton"><a href="login.html" id="loginLink">Login</a></li>
+              <!-- Add a logout button with a unique id -->
+              <li id="logoutButton" style="display:none;"><a href="javascript:void(0)" id="logoutLink">Logout</a></li>
             </ul>
+          </nav>
         </div>
-    </nav>
-    <div class="text-box">
-        <h1>About Rogelio</h1>
-    </div>
-</section>
+      </header>
 
-<section class="comment">
-    <div class="commentbox"></div>
-    <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
-    <script>commentBox('5668279758618624-proj')</script>
-</section>
+    <main>
+        <article id="about" class="main-section">
+            <h2>About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </article>
+
+        <article id="hobbies" class="main-section">
+            <h2>Hobbies</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+        </article>
+
+        <article id="projects" class="main-section">
+            <h2>Personal Projects</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+        </article>
+    </main>
+    <section class="comment">
+        <div class="commentbox"></div>
+        <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+        <script>commentBox('5668279758618624-proj')</script>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Seamans Squad</p>
+        </div>
+    </footer>
 </body>
 </html>
