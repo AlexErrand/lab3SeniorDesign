@@ -25,8 +25,40 @@ export interface Env {
 	// MY_QUEUE: Queue;
 }
 
+type LoginRequest = {
+	username: string;
+	password: string;
+  };
+
+
+export interface Env {
+	USERDATA : KVNamespace;
+}
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+	  const url = new URL(request.url);
+	  
+	  if (request.method === "POST" && url.pathname === "https://examplewrangler.azulitepoke.workers.dev/api/login") {
+		
+		const { username, password }: LoginRequest = await request.json();
+  
+		const userData = await env.USERDATA.get(username);
+		if (userData) {
+		  const user = JSON.parse(userData);
+		  if (user.password === password) {
+			// Password matches, proceed with login
+			return new Response("Login Successful", { status: 200 });
+		  } else {
+			// Password does not match, return an error
+			return new Response("Invalid password", { status: 403 });
+		  }
+		} else {
+		  // Username not found, return an error
+		  return new Response("User not found", { status: 404 });
+		}
+	  }
+  
+	  return new Response("Service running", { status: 200 });
 	},
-};
+  };
