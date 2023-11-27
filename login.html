@@ -54,16 +54,44 @@
 </head>
 <body>
 
-  <!-- Add a container to hold the response from the call -->
-
-  <form action="login.html" method="POST">
+  <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
-  
+
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
-  
-    <button type="submit">Login</button>
-  </form>
+
+    <!-- Add an ID to the form for easy identification in the script -->
+    <form id="loginForm">
+      <button type="button" onclick="submitForm()">Login</button>
+    </form>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+    <div class="container">
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </div>
+
+  <!-- JavaScript to handle form submission -->
+  <script>
+    function submitForm() {
+      // Get form data
+      var username = document.getElementsByName('uname')[0].value;
+      var password = document.getElementsByName('psw')[0].value;
+
+      // Validate the form data (replace this with your actual validation logic)
+      if (username === 'your_valid_username' && password === 'your_valid_password') {
+        //redirect
+        window.location.href = 'index.html';
+      } else {
+        // Show an error message (you can customize this part)
+        alert('Login failed. Please check your username and password.');
+      }
+    }
+  </script>
 </body>
 </html>

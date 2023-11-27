@@ -21,7 +21,7 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true 
     const password = req.body.psw;
 
     // Validate the username and password (replace this with your actual validation logic)
-    if (username === 'your_valid_username' && password === 'your_valid_username') {
+    if (username === 'correct_username' && password === 'correct_password') {
       // Log to MongoDB
       const logEntry = { username, timestamp: new Date() };
       db.collection('login_logs').insertOne(logEntry, (err, result) => {
@@ -34,7 +34,6 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true 
     } else { 
       // Send a failure response to the client
       res.redirect('login.html');
-      res.send('Login failed!');
     }
   });
 
