@@ -1,80 +1,80 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-  }
-  .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-  }
-  header {
-    background: #50a3a2;
-    color: white;
-    padding-top: 30px;
-    min-height: 70px;
-    border-bottom: 1px solid #eaeaea;
-  }
-  header a {
-    color: #000;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
-  }
-  header ul {
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-  }
-  header li {
-    float: left;
-    display: inline;
-    padding: 0 20px 0 20px;
-  }
-  header #branding {
-    float: left;
-  }
-  header #branding h1 {
-    margin: 0;
-  }
-  header nav {
-    float: right;
-    margin-top: 10px;
-  }
-  header .highlight, header .current a {
-    font-weight: bold;
-    color: #e8491d;
-    padding: 0;
-  }
-  header a:hover {
-    color: white;
-    font-weight: bold;
-  }
-  .main {
-    padding: 15px 0;
-  }
-  .main h2 {
-    color: #333;
-  }
-  .main p {
-    font-size: 18px;
-    line-height: 1.6em;
-  }
-  footer {
-    padding: 20px 0;
-    background-color: #333;
-    color: white;
-    text-align: center;
-  }
-  footer p {
-    margin: 0;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+header {
+  background: #50a3a2;
+  color: white;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: 1px solid #eaeaea;
+}
+header a {
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+header ul {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+header li {
+  float: left;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+header #branding {
+  float: left;
+}
+header #branding h1 {
+  margin: 0;
+}
+header nav {
+  float: right;
+  margin-top: 10px;
+}
+header .highlight, header .current a {
+  font-weight: bold;
+  color: #e8491d;
+  padding: 0;
+}
+header a:hover {
+  color: white;
+  font-weight: bold;
+}
+.main {
+  padding: 15px 0;
+}
+.main h2 {
+  color: #333;
+}
+.main p {
+  font-size: 18px;
+  line-height: 1.6em;
+}
+footer {
+  padding: 20px 0;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+footer p {
+  margin: 0;
+}
 
-  .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
 }
 
 header {
@@ -104,9 +104,10 @@ header nav ul li a {
 }
 
 main {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 21px;
 }
 
 .column {
@@ -124,15 +125,6 @@ main {
     margin-bottom: 15px;
 }
 
-/* Add any specific styling for the About Me, Hobbies, and Projects sections as needed */
-
-footer {
-    padding: 20px 0;
-    background-color: #333;
-    color: white;
-    text-align: center;
-}
-
 article {
   background-color: #b0b0b0;
   border-radius: 5px;
@@ -142,4 +134,19 @@ article {
   text-align: center;
   max-width: 350px;
   min-width: 250px;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  overflow-clip-margin: content-box;
+}
+
+.boxed-section {
+  border: 2px solid #b0b0b0;
+  padding: 20px; /* Adjust padding as needed */
+  margin: 20px 0; /* Adjust margin as needed */
 }
