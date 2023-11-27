@@ -31,10 +31,29 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true 
         // Redirect to index.html on successful login
         res.redirect('index.html');
       });
-    } else { 
+    } else {
       // Send a failure response to the client
       res.redirect('login.html');
     }
+  });
+
+  // Signup route
+  app.post('/signup', (req, res) => {
+    const username = req.body.uname;
+    const password = req.body.psw;
+    const email = req.body.email;
+
+    // Perform sign-up
+    const user = { username, password, email };
+    db.collection('users').insertOne(user, (err, result) => {
+      if (err) {
+        console.error('Error inserting user:', err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        console.log('User signed up:', user);
+        res.status(200).send('Sign Up successful!');
+      }
+    });
   });
 
   app.listen(port, () => {
