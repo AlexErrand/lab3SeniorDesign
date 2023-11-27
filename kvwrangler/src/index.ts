@@ -35,10 +35,41 @@ export interface Env {
 	USERDATA : KVNamespace;
 }
 
+const corsHeaders = {
+	'Access-Control-Allow-Origin': '*',
+	'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+	'Access-Control-Allow-Headers': 'Content-Type',
+  };
+  
+  function handleOptions(request: Request) {
+	
+	if (
+	  request.headers.get('Origin') !== null &&
+	  request.headers.get('Access-Control-Request-Method') !== null &&
+	  request.headers.get('Access-Control-Request-Headers') !== null
+	) {
+	  // Handle CORS pre-flight request.
+	  return new Response(null, {
+		headers: corsHeaders,
+	  });
+	} else {
+	  // Handle standard OPTIONS request.
+	  return new Response(null, {
+		headers: {
+		  Allow: 'GET, POST, OPTIONS',
+		},
+	  });
+	}
+  }
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 	  const url = new URL(request.url);
 	  
+	  if (request.method === 'OPTIONS') {
+		return handleOptions(request);
+	  }
+
 	  if (request.method === "POST" && url.pathname === "https://examplewrangler.azulitepoke.workers.dev/api/login") {
 		
 		const { username, password }: LoginRequest = await request.json();
@@ -48,7 +79,7 @@ export default {
 		  const user = JSON.parse(userData);
 		  if (user.password === password) {
 			// Password matches, proceed with login
-			return new Response("Login Successful", { status: 200 });
+			return new Response("Login Successful", { status: 200 , headers: corsHeaders});
 		  } else {
 			// Password does not match, return an error
 			return new Response("Invalid password", { status: 403 });
@@ -59,6 +90,6 @@ export default {
 		}
 	  }
   
-	  return new Response("Service running", { status: 200 });
+	  return new Response("Service running", { status: 200 ,headers: corsHeaders});
 	},
   };
