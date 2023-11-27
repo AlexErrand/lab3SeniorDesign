@@ -139,10 +139,12 @@ article {
 article img {
   max-width: 100%;
   height: auto;
+  border-radius: 8px
 }
 
 img {
   overflow-clip-margin: content-box;
+  border-radius: 8px
 }
 
 .boxed-section {
