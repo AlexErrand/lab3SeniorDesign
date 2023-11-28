@@ -7,7 +7,7 @@ const app = express();
 
 // Middleware to enable CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev/'); // Set the appropriate origin
+  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
