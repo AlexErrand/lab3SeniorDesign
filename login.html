@@ -104,7 +104,7 @@
         headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
         const response = await fetch('kvwrangler.azulitepoke.workers.dev', {
           mode: 'cors',
-          method: 'POST',
+          method: 'GET',
           headers: headers,
           body: JSON.stringify({ username, password }),
         });
