@@ -125,9 +125,20 @@ article {
   margin: 10px;
   padding: 20px;
   text-align: center;
-  max-width: 350px;
-  min-width: 250px;
+  max-width: 1000px;
+  min-width: 1000px;
 }
+
+.mainencasing {
+  background-color: #b0b0b0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #585858;
+  margin: 10px auto;
+  padding: 20px;
+  max-width: 1000px;
+  min-width: 1000px;
+}
+
 article img {
   max-width: 100%;
   height: auto;
