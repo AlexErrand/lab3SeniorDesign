@@ -67,54 +67,6 @@
 
       <!-- Add a submit button inside the form to capture the submit event -->
       <button type="submit">Log in</button>
-      <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-          e.preventDefault();
-
-          const username = document.querySelector('[name="uname"]').value;
-          const password = document.querySelector('[name="psw"]').value;
-
-          try {
-            let headers = new Headers();
-
-            headers.append('Content-Type', 'application/json');
-            headers.append('Accept', 'application/json');
-            headers.append('Authorization', 'Basic ' + btoa(username + ":" +  password));
-            headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
-
-            const response = await fetch('https://examplewrangler.azulitepoke.workers.dev/api/login', {
-                mode: 'no-cors',
-                credentials: 'include',
-                method: 'POST',
-                headers: headers
-            })
-            // .then(response => response.json())
-            // .then(json => console.log(json))
-            // .catch(error => console.log('Authorization failed: ' + error.message));
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            let responseData = '';
-            if (response.body) {
-              const reader = response.body.getReader();
-              const decoder = new TextDecoder();
-              while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                responseData += decoder.decode(value);
-              }
-            }
-
-            // Parse JSON data if available, otherwise handle an empty response
-            const data = responseData ? JSON.parse(responseData) : null;
-            document.getElementById('api-call-result').textContent = data ? JSON.stringify(data) : 'Empty response';
-
-          } catch (error) {
-            document.getElementById('api-call-result').textContent = 'Login failed: ' + error.message;
-          }
-        });
-      </script>
       <div class="checkbox">
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -137,30 +89,37 @@
     }
 
     // Intercept the form submission to send it via JavaScript
-    // document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    //   e.preventDefault();
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
   
-    //   const username = document.querySelector('[name="uname"]').value;
-    //   const password = document.querySelector('[name="psw"]').value;
+      const username = document.querySelector('[name="uname"]').value;
+      const password = document.querySelector('[name="psw"]').value;
 
-    //   try {
-    //     const response = await fetch('https://examplewrangler.azulitepoke.workers.dev/api/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ username, password })
-    //     });
+      try {
+        let headers = new Headers();
 
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" +  password));
+        headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
+        const response = await fetch('https://examplewrangler.azulitepoke.workers.dev/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+          headers: headers
+        });
 
-    //     const data = await response.text();
-    //     document.getElementById('api-call-result').textContent = data;
-    //     // Further actions based on the response, like redirecting to a different page
-    //   } catch (error) {
-    //     document.getElementById('api-call-result').textContent = 'Login failed: ' + error.message;
-    //   }
-    // });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.text();
+        document.getElementById('api-call-result').textContent = data;
+        // Further actions based on the response, like redirecting to a different page
+      } catch (error) {
+        document.getElementById('api-call-result').textContent = 'Login failed: ' + error.message;
+      }
+    });
   </script>
 </body>
 </html>
