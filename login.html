@@ -114,7 +114,7 @@
         }
 
         const data = await response.text();
-        document.getElementById('api-call-result').textContent = data;
+        document.getElementById('api-call-result').textContent = "Sucessfully Logged In";
         // Further actions based on the response, like redirecting to a different page
       } catch (error) {
         document.getElementById('api-call-result').textContent = 'Login failed: ' + error.message;
