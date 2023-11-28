@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 // Serve assets from the /public folder
-app.use(express.static(join(__dirname, "public")));
+// app.use(express.static(join(__dirname, "public")));
 
 // Create the JWT validation middleware
 const checkJwt = auth({
