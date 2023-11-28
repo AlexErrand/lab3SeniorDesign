@@ -7,12 +7,15 @@ const app = express();
 
 // Middleware to enable CORS
 app.use((req, res, next) => {
-  //res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
-  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // only allow request from our origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Set the appropriate origin
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+      res.sendStatus(200); // Respond to preflight requests
+  } else {
+      next();
+  }
 });
 
 // Serve assets from the /public folder
