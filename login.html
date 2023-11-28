@@ -66,26 +66,35 @@
       <input type="password" placeholder="Enter Password" name="psw" required>
 
       <!-- Add a submit button inside the form to capture the submit event -->
-      <button type="submit" onClick="performSignIn()">Log in</button>
+      <button type="submit">Log in</button>
       <script>
-        function performSignIn() {
-        let headers = new Headers();
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+          e.preventDefault();
 
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Basic ' + btoa(username + ":" +  password));
-        headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
+          const username = document.querySelector('[name="uname"]').value;
+          const password = document.querySelector('[name="psw"]').value;
 
-        fetch(sign_in, {
-            mode: 'cors',
-            credentials: 'include',
-            method: 'POST',
-            headers: headers
-        })
-        .then(response => response.json())
-        .then(json => console.log(json))
-        .catch(error => console.log('Authorization failed: ' + error.message));
-       }
+          try {
+            let headers = new Headers();
+
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+            headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+            headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
+
+            fetch(sign_in, {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'POST',
+                headers: headers
+            })
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(error => console.log('Authorization failed: ' + error.message));
+          } catch (error) {
+            document.getElementById('api-call-result').textContent = 'Login failed: ' + error.message;
+          }
+        });
       </script>
       <div class="checkbox">
         <label>
