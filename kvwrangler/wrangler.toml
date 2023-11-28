@@ -51,5 +51,5 @@ compatibility_date = "2023-11-21"
 # new_classes = ["MyDurableObject"]
 
 kv_namespaces = [
-    { binding = "USERINFO", id = "2490da09bf144d659fd20ed95550c7b5" }
+    { binding = "worker-USERINFO", id = "2490da09bf144d659fd20ed95550c7b5" }
 ]
