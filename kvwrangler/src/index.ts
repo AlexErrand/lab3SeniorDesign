@@ -9,6 +9,7 @@
  */
 
 export interface Env {
+	USERDATA: KVNamespace;
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
 	//
@@ -29,11 +30,6 @@ type LoginRequest = {
 	username: string;
 	password: string;
 };
-
-
-export interface Env {
-	USERDATA: KVNamespace;
-}
 
 const corsHeaders = {
 	'Access-Control-Allow-Origin': 'https://seaman-squad.pages.dev',
