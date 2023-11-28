@@ -60,32 +60,48 @@ function handleOptions(request: Request) {
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		const url = new URL(request.url);
-
-		if (request.method === 'OPTIONS') {
-			return handleOptions(request);
+	  const url = new URL(request.url);
+	  
+	  if (request.method === 'OPTIONS') {
+		return handleOptions(request);
+	  }
+  
+	  if (request.method === "POST" && url.pathname === "kvwrangler.azulitepoke.workers.dev") {
+		const { username, password }: LoginRequest = await request.json();
+		const userData = await env.USERDATA.get(username);
+		
+		if (userData) {
+		  const user = JSON.parse(userData);
+		  if (user.password === password) {
+			// Password matches, proceed with login
+			return new Response(JSON.stringify({ message: "Login successful" }), {
+			  status: 200,
+			  headers: corsHeaders
+			});
+		  } else {
+			// Password does not match, return an error
+			return new Response(JSON.stringify({ message: "Invalid password" }), {
+			  status: 403,
+			  headers: corsHeaders
+			});
+		  }
+		} else {
+		  // Username not found, return an error
+		  return new Response(JSON.stringify({ message: "User not found" }), {
+			status: 404,
+			headers: corsHeaders
+		  });
 		}
-
-		if (request.method === "POST" && url.pathname === "kvwrangler.azulitepoke.workers.dev") {
-
-			const { username, password }: LoginRequest = await request.json();
-
-			const userData = await env.USERDATA.get(username);
-			if (userData) {
-				const user = JSON.parse(userData);
-				if (user.password === password) {
-					// Password matches, proceed with login
-					return new Response("Login Successful", { status: 200, headers: corsHeaders });
-				} else {
-					// Password does not match, return an error
-					return new Response("Invalid password", { status: 403 });
-				}
-			} else {
-				// Username not found, return an error
-				return new Response("User not found", { status: 404 });
-			}
-		}
-
-		return new Response("Service running", { status: 200, headers: corsHeaders });
+	  }
+  
+	  // Other routes or default response
+	  return new Response(JSON.stringify({ message: "Service running" }), {
+		status: 200,
+		headers: corsHeaders
+	  });
 	},
-};
+  };
+
+
+
+
