@@ -83,7 +83,7 @@
             headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
 
             fetch('https://examplewrangler.azulitepoke.workers.dev/api/login', {
-                mode: 'cors',
+                mode: 'no-cors',
                 credentials: 'include',
                 method: 'POST',
                 headers: headers
