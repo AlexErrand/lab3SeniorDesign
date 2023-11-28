@@ -82,7 +82,7 @@
             headers.append('Authorization', 'Basic ' + btoa(username + ":" +  password));
             headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
 
-            fetch(sign_in, {
+            fetch('https://examplewrangler.azulitepoke.workers.dev/api/login', {
                 mode: 'cors',
                 credentials: 'include',
                 method: 'POST',
