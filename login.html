@@ -73,7 +73,7 @@
 
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" +  password));
         headers.append('Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
 
         fetch(sign_in, {
