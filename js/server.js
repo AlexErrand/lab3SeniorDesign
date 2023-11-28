@@ -5,6 +5,15 @@ const authConfig = require("../auth_config.json");
 
 const app = express();
 
+// Middleware to enable CORS
+app.use((req, res, next) => {
+  //res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // only allow request from our origin
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 // Serve assets from the /public folder
 app.use(express.static(join(__dirname, "public")));
 
@@ -41,13 +50,9 @@ app.use(function(err, req, res, next) {
   next(err, req, res);
 });
 
-// Middleware to enable CORS
-app.use((req, res, next) => {
-  //res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
-  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // only allow request from our origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
+// Your API endpoints
+app.post('/api/login', (req, res) => {
+  // Handle login logic
 });
 
 module.exports = app;
