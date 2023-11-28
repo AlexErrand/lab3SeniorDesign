@@ -37,8 +37,9 @@ export interface Env {
 
 const corsHeaders = {
 	'Access-Control-Allow-Origin': 'https://seaman-squad.pages.dev/',
+	'Access-Control-Allow-Credentials': 'true',
 	'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-	'Access-Control-Allow-Headers': 'Content-Type',
+	'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
   };
   
   function handleOptions(request: Request) {
