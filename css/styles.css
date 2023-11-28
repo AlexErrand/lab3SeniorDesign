@@ -149,6 +149,6 @@ img {
 
 .boxed-section {
   border: 2px solid #b0b0b0;
-  padding: 20px; /* Adjust padding as needed */
-  margin: 20px 0; /* Adjust margin as needed */
+  padding: 20px;
+  margin: 20px 0;
 }
