@@ -28,11 +28,11 @@ export interface Env {
 type LoginRequest = {
 	username: string;
 	password: string;
-  };
+};
 
 
 export interface Env {
-	USERDATA : KVNamespace;
+	USERDATA: KVNamespace;
 }
 
 const corsHeaders = {
@@ -40,56 +40,56 @@ const corsHeaders = {
 	// 'Access-Control-Allow-Credentials': 'true',
 	'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
 	'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
-  };
-  
-  function handleOptions(request: Request) {
+};
+
+function handleOptions(request: Request) {
 	if (
-	  request.headers.get('Origin') !== null &&
-	  request.headers.get('Access-Control-Request-Method') !== null &&
-	  request.headers.get('Access-Control-Request-Headers') !== null
+		request.headers.get('Origin') !== null &&
+		request.headers.get('Access-Control-Request-Method') !== null &&
+		request.headers.get('Access-Control-Request-Headers') !== null
 	) {
-	  // Handle CORS pre-flight request.
-	  return new Response(null, {
-		headers: corsHeaders,
-	  });
+		// Handle CORS pre-flight request.
+		return new Response(null, {
+			headers: corsHeaders,
+		});
 	} else {
-	  // Handle standard OPTIONS request.
-	  return new Response(null, {
-		headers: {
-		  Allow: 'GET, POST, OPTIONS',
-		},
-	  });
+		// Handle standard OPTIONS request.
+		return new Response(null, {
+			headers: {
+				Allow: 'GET, POST, OPTIONS',
+			},
+		});
 	}
-  }
+}
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-	  const url = new URL(request.url);
-	  
-	  if (request.method === 'OPTIONS') {
-		return handleOptions(request);
-	  }
+		const url = new URL(request.url);
 
-	  if (request.method === "POST" && url.pathname === "https://kvwrangler.azulitepoke.workers.dev/api/login") {
-		
-		const { username, password }: LoginRequest = await request.json();
-  
-		const userData = await env.USERDATA.get(username);
-		if (userData) {
-		  const user = JSON.parse(userData);
-		  if (user.password === password) {
-			// Password matches, proceed with login
-			return new Response("Login Successful", { status: 200 , headers: corsHeaders});
-		  } else {
-			// Password does not match, return an error
-			return new Response("Invalid password", { status: 403 });
-		  }
-		} else {
-		  // Username not found, return an error
-		  return new Response("User not found", { status: 404 });
+		if (request.method === 'OPTIONS') {
+			return handleOptions(request);
 		}
-	  }
-  
-	  return new Response("Service running", { status: 200 ,headers: corsHeaders});
+
+		if (request.method === "POST" && url.pathname === "https://kvwrangler.azulitepoke.workers.dev/api/login") {
+
+			const { username, password }: LoginRequest = await request.json();
+
+			const userData = await env.USERDATA.get(username);
+			if (userData) {
+				const user = JSON.parse(userData);
+				if (user.password === password) {
+					// Password matches, proceed with login
+					return new Response("Login Successful", { status: 200, headers: corsHeaders });
+				} else {
+					// Password does not match, return an error
+					return new Response("Invalid password", { status: 403 });
+				}
+			} else {
+				// Username not found, return an error
+				return new Response("User not found", { status: 404 });
+			}
+		}
+
+		return new Response("Service running", { status: 200, headers: corsHeaders });
 	},
-  };
+};

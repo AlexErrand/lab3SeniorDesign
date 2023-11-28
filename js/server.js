@@ -6,20 +6,20 @@ const authConfig = require("../auth_config.json");
 const app = express();
 
 // Middleware to enable CORS
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-  if (req.method === 'OPTIONS') {
-      res.sendStatus(200); // Respond to preflight requests
-  } else {
-      next();
-  }
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://seaman-squad.pages.dev'); // Set the appropriate origin
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+//   if (req.method === 'OPTIONS') {
+//       res.sendStatus(200); // Respond to preflight requests
+//   } else {
+//       next();
+//   }
+// });
 
 // Serve assets from the /public folder
-// app.use(express.static(join(__dirname, "public")));
+app.use(express.static(join(__dirname, "public")));
 
 // Create the JWT validation middleware
 const checkJwt = auth({
