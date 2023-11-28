@@ -70,7 +70,7 @@ export default {
 		return handleOptions(request);
 	  }
 
-	  if (request.method === "POST" && url.pathname === "https://examplewrangler.azulitepoke.workers.dev/api/login") {
+	  if (request.method === "POST" && url.pathname === "https://kvwrangler.azulitepoke.workers.dev/") {
 		
 		const { username, password }: LoginRequest = await request.json();
   
